@@ -1,16 +1,27 @@
-# This is a sample Python script.
+import pymongo
+import urllib.parse
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Set the username and password
+username = "mahindrabommu"
+password = "Amma@143"
 
+# Escape the username and password using urllib.parse.quote_plus
+escaped_username = urllib.parse.quote_plus(username)
+escaped_password = urllib.parse.quote_plus(password)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Construct the MongoDB connection URI using the escaped username and password
+uri = f"mongodb+srv://{escaped_username}:{escaped_password}@cluster0.c7yj0s6.mongodb.net/?retryWrites=true&w=majority"
 
+# Connect to MongoDB using pymongo
+client = pymongo.MongoClient(uri)
+db= client.test
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print(db)
+d={
+    "name": "mahi",
+    "email": "mahi@mahi.com",
+     "number":"1234567890"
+}
+db1= client['mongotest']
+coll = db1['test']
+coll.insert_one(d)
